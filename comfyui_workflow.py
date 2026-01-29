@@ -7,16 +7,18 @@ from typing import Dict, List
 from config import Config
 
 class ComfyUIWorkflow:
-    """Handler for ComfyUI workflow generation"""
+    """Handler for ComfyUI workflow generation and submission"""
     
-    def __init__(self, output_dir: str = None):
+    def __init__(self, output_dir: str = None, comfyui_host: str = None):
         """
         Initialize ComfyUI workflow handler
         
         Args:
             output_dir: Directory to save workflow files
+            comfyui_host: ComfyUI server URL (for future API integration)
         """
         self.output_dir = output_dir or Config.OUTPUT_DIR
+        self.comfyui_host = comfyui_host or Config.COMFYUI_HOST
         os.makedirs(self.output_dir, exist_ok=True)
     
     def create_workflow(self, prompt: str, image_info: Dict = None) -> Dict:
@@ -202,3 +204,24 @@ class ComfyUIWorkflow:
         
         print(f"Saved summary to: {summary_path}")
         return summary_path
+    
+    def submit_workflow_to_comfyui(self, workflow: Dict) -> Dict:
+        """
+        Submit a workflow to ComfyUI server via API
+        
+        NOTE: This is a placeholder for future implementation.
+        The ComfyUI API file and endpoint will be provided later.
+        
+        Args:
+            workflow: ComfyUI workflow dictionary
+            
+        Returns:
+            Response from ComfyUI API
+        """
+        # TODO: Implement ComfyUI API integration
+        # This will be implemented once the API file and endpoint are provided
+        raise NotImplementedError(
+            "ComfyUI API integration not yet implemented. "
+            "The API file and endpoint will be provided later. "
+            "For now, use the generated workflow JSON files and import them manually into ComfyUI."
+        )

@@ -9,6 +9,7 @@ An automated pipeline that fetches top images from Imgur, analyzes them with qwe
 - 🤖 Generates image recreation prompts using llama 3.1 LLM
 - 🎨 Creates ComfyUI workflow files ready to import
 - 📊 Produces detailed summary of all processed images
+- 🔄 Automatic ComfyUI API submission (coming soon - API integration pending)
 
 ## Prerequisites
 
@@ -84,10 +85,14 @@ python main.py --vision-model llava --llm-model mistral
 
 ### Using the Generated Workflows
 
+**Current Method (Manual Import):**
 1. Open ComfyUI in your browser
 2. Load one of the workflow JSON files from the `output/` directory
 3. Adjust parameters as needed (seed, steps, etc.)
 4. Queue the prompt to generate the image
+
+**Future Enhancement:**
+Direct API integration with ComfyUI server is planned. Once the ComfyUI API file and endpoint are provided, the pipeline will automatically submit workflows to ComfyUI for execution.
 
 ## Project Structure
 
@@ -98,9 +103,12 @@ ollamaVision/
 ├── imgur_client.py        # Imgur API integration
 ├── ollama_client.py       # Ollama vision and LLM integration
 ├── comfyui_workflow.py    # ComfyUI workflow generation
+├── comfyui_api.py         # ComfyUI API client (placeholder for future implementation)
 ├── requirements.txt       # Python dependencies
 ├── .env.example          # Example environment variables
 ├── .gitignore            # Git ignore rules
+├── demo.py               # Demo script showing expected output
+├── test_ollama_vision.py # Unit tests
 ├── downloads/            # Downloaded images (created automatically)
 └── output/               # Generated workflows and summary (created automatically)
 ```
