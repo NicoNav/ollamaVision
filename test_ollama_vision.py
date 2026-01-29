@@ -2,7 +2,6 @@
 Tests for ollamaVision components
 """
 import unittest
-from unittest.mock import Mock, patch, MagicMock
 import os
 import sys
 

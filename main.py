@@ -11,6 +11,8 @@ This script orchestrates the complete pipeline:
 
 import argparse
 import sys
+import os
+from pathlib import Path
 from imgur_client import ImgurClient
 from ollama_client import OllamaVision
 from comfyui_workflow import ComfyUIWorkflow
@@ -78,8 +80,6 @@ def main():
     else:
         print("Step 1: Skipping download (using existing images)")
         print("-" * 60)
-        import os
-        from pathlib import Path
         
         # Load existing images from downloads directory
         download_dir = Config.DOWNLOAD_DIR

@@ -2,7 +2,6 @@
 Ollama integration for vision and LLM models
 """
 import ollama
-import base64
 from typing import Dict, List
 from config import Config
 
@@ -38,11 +37,7 @@ class OllamaVision:
         try:
             print(f"Analyzing image with {self.vision_model}: {image_path}")
             
-            # Read and encode image
-            with open(image_path, 'rb') as f:
-                image_data = f.read()
-            
-            # Call Ollama vision model
+            # Call Ollama vision model with image path
             response = self.client.chat(
                 model=self.vision_model,
                 messages=[{
