@@ -81,6 +81,9 @@ python main.py --skip-download
 
 # Use different models
 python main.py --vision-model llava --llm-model mistral
+
+# Use a custom LLM endpoint instead of Ollama
+python main.py --llm-endpoint http://your-llm-server:port/api --llm-api-key YOUR_KEY
 ```
 
 ### Using the Generated Workflows
@@ -137,6 +140,8 @@ The pipeline generates:
 - `OLLAMA_HOST` - Ollama server URL (default: `http://localhost:11434`)
 - `VISION_MODEL` - Vision model name (default: `qwen3-vl`)
 - `LLM_MODEL` - LLM model name (default: `llama3.1`)
+- `LLM_ENDPOINT` - Custom LLM endpoint URL (optional, overrides Ollama for prompt generation)
+- `LLM_API_KEY` - API key for custom LLM endpoint (optional)
 - `COMFYUI_HOST` - ComfyUI server URL (default: `http://localhost:8188`)
 
 ### Customizing the Pipeline
@@ -146,7 +151,25 @@ You can modify the pipeline by editing the respective modules:
 - **Imgur filters**: Edit `imgur_client.py` → `filter_images()`
 - **Vision analysis prompt**: Edit `ollama_client.py` → `analyze_image()`
 - **Prompt generation**: Edit `ollama_client.py` → `generate_prompt()`
+- **Custom LLM endpoint**: Edit `ollama_client.py` → `_generate_prompt_custom()` (when endpoint is provided)
 - **ComfyUI workflow structure**: Edit `comfyui_workflow.py` → `create_workflow()`
+
+### Using a Custom LLM Endpoint
+
+The pipeline supports using a custom LLM endpoint instead of Ollama for prompt generation:
+
+1. Set in environment:
+```bash
+export LLM_ENDPOINT=http://your-llm-server:port/api
+export LLM_API_KEY=your_api_key  # if needed
+```
+
+2. Or use command-line arguments:
+```bash
+python main.py --llm-endpoint http://your-llm-server:port/api --llm-api-key your_key
+```
+
+The vision model (qwen3-vl) will still use Ollama, but prompt generation will use your custom endpoint.
 
 ## Troubleshooting
 

@@ -46,6 +46,18 @@ def main():
         default=Config.LLM_MODEL,
         help=f'LLM model name (default: {Config.LLM_MODEL})'
     )
+    parser.add_argument(
+        '--llm-endpoint',
+        type=str,
+        default=None,
+        help='Custom LLM endpoint URL (optional, overrides Ollama for LLM)'
+    )
+    parser.add_argument(
+        '--llm-api-key',
+        type=str,
+        default=None,
+        help='API key for custom LLM endpoint (optional)'
+    )
     
     args = parser.parse_args()
     
@@ -108,7 +120,9 @@ def main():
     try:
         ollama_client = OllamaVision(
             vision_model=args.vision_model,
-            llm_model=args.llm_model
+            llm_model=args.llm_model,
+            llm_endpoint=args.llm_endpoint,
+            llm_api_key=args.llm_api_key
         )
         
         image_paths = [img['local_path'] for img in images_data]
